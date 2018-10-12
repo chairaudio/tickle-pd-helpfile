@@ -1,4 +1,4 @@
-#N canvas 204 254 848 857 10;
+#N canvas 532 256 848 857 10;
 #X declare -lib pddp;
 #X obj 19 483 cnv 15 540 40 empty empty empty 20 12 0 14 -103858 -66577
 0;
@@ -27,7 +27,7 @@ instrument;
 0;
 #X obj 106 365 cnv 15 450 70 empty empty empty 20 12 0 14 -262130 -66577
 0;
-#X obj 31 76 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1 1
+#X obj 31 76 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0 1
 ;
 #X floatatom 123 417 6 0 0 1 x - #0-x;
 #X floatatom 180 417 6 0 0 1 y - #0-y;
@@ -44,7 +44,7 @@ instrument;
 #X obj 136 173 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 102 623 vsl 15 59 -30 30 0 1 empty \$0-main dB_Gain -45 25 0
-10 -262144 -1 -1 2800 1;
+10 -262144 -1 -1 2900 1;
 #N canvas 1100 627 735 338 feedback-cancellation 0;
 #X obj 38 15 inlet~;
 #X obj 38 242 outlet~;
@@ -81,7 +81,7 @@ the Tickle and sometimes issues with feedback occur.;
 #X connect 10 0 8 1;
 #X connect 15 0 2 0;
 #X restore 31 547 pd feedback-cancellation;
-#X obj 172 529 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 172 529 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X text 110 585 <--- here is where the sound synthesis would happen
 (see examples), f 68;
@@ -298,7 +298,7 @@ the Tickle and sometimes issues with feedback occur.;
 #X connect 18 0 14 0;
 #X connect 19 0 16 0;
 #X restore 184 340 pd rgb2pd;
-#X obj 102 121 cnv 15 52 15 empty \$0-wheel rotary 5 7 0 11 -241601
+#X obj 102 121 cnv 15 52 15 empty \$0-wheel rotary 5 7 0 11 -258241
 -262144 0;
 #X obj 184 9 inlet;
 #X obj 184 94 + 1;
@@ -560,22 +560,24 @@ path to the search paths., f 42;
 #X connect 14 0 0 0;
 #X connect 15 0 3 0;
 #X restore 151 18 pd plot-pos;
-#X text 428 178 left;
-#X text 429 41 right;
-#X text 430 220 top;
+#X text 425 155 left;
+#X text 425 45 right;
+#X text 426 222 top;
 #X obj 22 345 cnv 15 400 30 empty empty empty 20 12 0 14 -255794 -66577
 0;
 #N canvas 0 50 450 300 (subpatch) 0;
 #X array \$0-y-axis 200 float 2;
 #X coords 0 0 200 1.3 400 150 1 0 0;
 #X restore 22 226 graph;
-#X text 429 357 bottom;
+#X text 425 330 bottom;
 #X obj 23 169 cnv 15 400 30 empty empty empty 20 12 0 14 -255794 -66577
 0;
 #N canvas 0 50 450 300 (subpatch) 0;
 #X array \$0-x-axis 200 float 2;
 #X coords 0 1 200 -0.3 400 150 1 0 0;
 #X restore 23 50 graph;
+#X text 425 176 release;
+#X text 424 354 release;
 #X restore 89 501 pd data;
 #N canvas 1081 536 470 588 audio 0;
 #X obj 18 15 inlet~;
@@ -592,7 +594,7 @@ path to the search paths., f 42;
 #X text 412 318 -1;
 #X text 416 199 1;
 #X floatatom 37 335 6 0 0 1 dB - -;
-#N canvas 516 559 466 330 draw_envelope 1;
+#N canvas 516 559 466 330 draw_envelope 0;
 #X obj 42 134 list;
 #X obj 42 180 list trim;
 #X obj 42 204 s \$0-env;
