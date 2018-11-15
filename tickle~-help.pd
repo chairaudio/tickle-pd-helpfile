@@ -1,4 +1,4 @@
-#N canvas 555 205 848 857 10;
+#N canvas 532 191 848 857 10;
 #X declare -lib pddp;
 #X obj 19 483 cnv 15 540 40 empty empty empty 20 12 0 14 -103858 -66577
 0;
@@ -6,7 +6,7 @@
 0;
 #X obj 19 573 cnv 15 540 40 empty empty empty 20 12 0 14 -206578 -66577
 0;
-#N canvas 4 579 453 298 META 0;
+#N canvas 1140 486 453 298 META 0;
 #X text 40 153 LIBRARY internal;
 #X text 39 113 OUTLET_0 signal;
 #X text 38 16 KEYWORDS tickle hardware;
@@ -16,18 +16,18 @@
 #X text 40 233 HELP_PATCH_AUTHORS Max Neupert;
 #X text 40 213 RELEASE_DATE 2018;
 #X text 40 193 WEBSITE https://chair.audio;
-#X text 38 92 INLET_0 active info;
 #X text 38 56 DESCRIPTION Tickle hardware vibration sensor controller
 instrument;
 #X obj 285 14 declare -lib pddp;
+#X text 38 92 INLET_0 active info led latency;
 #X restore 413 816 pd META;
-#X obj 18 147 cnv 15 80 40 empty empty empty 20 12 0 14 -252850 -66577
+#X obj 18 170 cnv 15 80 40 empty empty empty 20 12 0 14 -252850 -66577
 0;
 #X obj 218 266 cnv 15 340 25 empty empty empty 20 12 0 14 -262130 -66577
 0;
 #X obj 106 365 cnv 15 450 70 empty empty empty 20 12 0 14 -262130 -66577
 0;
-#X obj 31 76 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1 1
+#X obj 31 76 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0 1
 ;
 #X floatatom 123 417 6 0 0 1 x - #0-x;
 #X floatatom 180 417 6 0 0 1 y - #0-y;
@@ -39,9 +39,7 @@ instrument;
 #X obj 107 463 tgl 15 0 empty empty down 17 7 0 10 -262144 -1 -1 0
 1;
 #X msg 51 102 info;
-#X obj 91 212 print tickletilde;
-#X obj 91 191 spigot 0;
-#X obj 136 173 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 202 194 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 102 623 vsl 15 59 -30 30 0 1 empty \$0-main dB_Gain -45 25 0
 10 -262144 -1 -1 3900 1;
@@ -438,7 +436,7 @@ the Tickle and sometimes issues with feedback occur.;
 #X connect 19 0 20 0;
 #X connect 20 0 0 0;
 #X connect 21 0 0 0;
-#X restore 91 121 pd LED;
+#X restore 103 162 pd LED;
 #N canvas 1193 698 593 158 synthesis 0;
 #X obj 29 24 inlet~;
 #X obj 29 47 outlet~;
@@ -447,7 +445,7 @@ the synthesis would happen in your patch. Please refer to the example
 patches to see the synthesis in action.;
 #X connect 0 0 1 0;
 #X restore 31 587 pd synthesis;
-#X text 157 173 Print all messages to console;
+#X text 223 194 Print all messages to console;
 #X obj 69 710 bng 15 250 50 0 empty empty clipping 18 9 0 10 -262144
 -258113 -1;
 #X text 115 643 -> 0;
@@ -478,7 +476,7 @@ https://chair.audio ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 of 64, f 81;
 #X text 28 10 A driver installation and the Tickle hardware are neccessary
 to run this patch., f 80;
-#X text 138 122 See inside this subpatch for LED color control;
+#X text 150 163 See inside this subpatch for LED color control;
 #X text 89 734 It's good practice to protect the output from possible
 DC-offset with a lowpass filter., f 70;
 #X text 179 487 Here you will find some tools to visualize the audio
@@ -790,39 +788,49 @@ saved to /tmp/;
 #X connect 18 0 32 0;
 #X restore 32 501 pd audio;
 #X text 52 483 Diagnostic:;
-#X obj 31 161 tickle~;
-#X msg 410 171 latency \$1;
-#X floatatom 410 149 5 96 2304 0 - - -;
-#X connect 7 0 89 0;
+#X obj 31 184 tickle~;
+#X msg 92 140 latency \$1;
+#X floatatom 92 123 5 96 2304 0 - - -;
+#N canvas 623 382 200 171 print-tickletilde 0;
+#X obj 20 20 inlet;
+#X obj 70 20 inlet;
+#X obj 30 81 print tickletilde;
+#X obj 30 60 spigot 0;
+#X connect 0 0 3 0;
+#X connect 1 0 3 1;
+#X connect 3 0 2 0;
+#X restore 85 215 pd print-tickletilde;
+#X text 144 120 Set ringbuffer size in range from 96 to 2304 samples
+;
+#X connect 7 0 87 0;
 #X connect 10 0 11 0;
-#X connect 10 1 24 0;
-#X connect 10 2 25 0;
-#X connect 11 0 26 0;
-#X connect 12 0 29 0;
+#X connect 10 1 22 0;
+#X connect 10 2 23 0;
+#X connect 11 0 24 0;
+#X connect 12 0 27 0;
 #X connect 14 0 13 0;
 #X connect 14 1 15 0;
-#X connect 16 0 89 0;
-#X connect 18 0 17 0;
-#X connect 19 0 18 1;
-#X connect 20 0 28 1;
-#X connect 20 0 27 0;
-#X connect 21 0 37 0;
-#X connect 22 0 21 1;
-#X connect 28 0 46 0;
-#X connect 28 2 39 0;
-#X connect 29 0 8 0;
-#X connect 29 1 9 0;
-#X connect 36 0 89 0;
-#X connect 37 0 28 0;
-#X connect 46 0 45 0;
-#X connect 46 0 45 1;
-#X connect 73 0 14 0;
-#X connect 73 1 12 0;
-#X connect 73 2 10 0;
-#X connect 73 3 55 0;
-#X connect 87 0 21 0;
-#X connect 89 0 87 0;
-#X connect 89 1 73 0;
-#X connect 89 1 18 0;
-#X connect 90 0 89 0;
-#X connect 91 0 90 0;
+#X connect 16 0 87 0;
+#X connect 17 0 90 1;
+#X connect 18 0 26 1;
+#X connect 18 0 25 0;
+#X connect 19 0 35 0;
+#X connect 20 0 19 1;
+#X connect 26 0 44 0;
+#X connect 26 2 37 0;
+#X connect 27 0 8 0;
+#X connect 27 1 9 0;
+#X connect 34 0 87 0;
+#X connect 35 0 26 0;
+#X connect 44 0 43 0;
+#X connect 44 0 43 1;
+#X connect 71 0 14 0;
+#X connect 71 1 12 0;
+#X connect 71 2 10 0;
+#X connect 71 3 53 0;
+#X connect 85 0 19 0;
+#X connect 87 0 85 0;
+#X connect 87 1 71 0;
+#X connect 87 1 90 0;
+#X connect 88 0 87 0;
+#X connect 89 0 88 0;
